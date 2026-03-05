@@ -1,0 +1,5 @@
+{
+  "name": "Jangkrik",
+  "description": "An interactive 3D-style portfolio and AI assistant for Arifandi Tanggahma.",
+  "requestFramePermissions": ["microphone"]
+}

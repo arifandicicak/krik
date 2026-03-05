@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-brand-green: #00ff41;
+  --color-brand-dark-green: #003b00;
+  --color-brand-black: #050505;
+  --color-brand-gray: #1a1a1a;
+  
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-display: "Space Grotesk", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-black text-white antialiased selection:bg-brand-green selection:text-brand-black;
+    font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+  }
+
+  /* Prevent white background on autofill */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus {
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0px 1000px #050505 inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-white/[0.02] backdrop-blur-2xl border border-white/10 rounded-3xl;
+  }
+  
+  button:focus {
+    @apply outline-none ring-0;
+  }
+  
+  .green-glow {
+    @apply shadow-[0_0_30px_rgba(0,255,65,0.15)];
+  }
+
+  .typing-dot {
+    @apply w-1.5 h-1.5 bg-brand-green rounded-full animate-bounce;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .card-3d {
+    @apply transition-transform duration-500 ease-out;
+    transform: translateZ(0);
+  }
+
+  .card-3d:hover {
+    transform: translateZ(20px) rotateX(2deg) rotateY(-2deg);
+  }
+
+  .grid-bg {
+    background-image: 
+      linear-gradient(to right, rgba(0, 255, 65, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(circle at center, black, transparent 80%);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(2deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.scanline {
+  @apply absolute inset-0 pointer-events-none overflow-hidden;
+  background: linear-gradient(to bottom, transparent, rgba(0, 255, 65, 0.05), transparent);
+  animation: scanline 8s linear infinite;
+}
